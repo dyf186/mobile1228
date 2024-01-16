@@ -27,6 +27,10 @@ export default new Vuex.Store({
       // local Storage做持久清除
       localStorage.removeItem(USER_KEY);
     },
+    // 删除token数据
+    clearToken(state){
+      delete state.user.token
+    }
   },
   actions: {},
   modules: {},

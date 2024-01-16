@@ -1,5 +1,9 @@
 <template>
-  <div class="container">home组件</div>
+  <div class="container">home组件
+    <van-button round size="small" @click="$store.commit('clearToken')">清除token</van-button>
+    
+  </div>
+  
 </template>
 
 <script>
