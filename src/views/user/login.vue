@@ -24,7 +24,14 @@
       </van-field>
     </van-cell-group>
     <div class="login-btn">
-      <van-button type="info" size="small" round block @click="login()"
+      <van-button
+        :loading="isLogin"
+        loading-text="登录中..."
+        type="info"
+        size="small"
+        round
+        block
+        @click="login()"
         >登录</van-button
       >
     </div>
@@ -40,6 +47,7 @@ export default {
   props: {},
   data() {
     return {
+      isLogin: false,
       loginForm: { mobile: "13911111111", code: "246810" },
     };
   },
@@ -50,15 +58,25 @@ export default {
   beforeDestroy() {},
   destroyed() {},
   methods: {
-    async login() {
+    // async login() {
+    login() {
+      this.isLogin = true;
       try {
-        const result = await apiUserLogin(this.loginForm);
+        // const result = await apiUserLogin(this.loginForm);
+        // vuex存储登录信息
+        // data:{token:xx,refresh_token:xx}
+        // this.$store.commit("updateUser", result);
+        // 临时可登录成功
+        this.$store.commit("updateUser", {
+          token: 'x111x',
+          refresh_token: 'x21212x',
+        });
         this.$toast.success("登录成功");
         this.$router.push("/");
       } catch (err) {
-        console.log(err,'12')
         this.$toast.fail("手机号或验证码错误" + err);
       }
+      this.isLogin = false;
     },
   },
 };

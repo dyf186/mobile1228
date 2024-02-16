@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import router from "@/router/index.js";
 
 Vue.use(Vuex);
 // localStorage 存储用户信息的key名称，统一设置，方便后续使用
@@ -26,11 +27,15 @@ export default new Vuex.Store({
       state.user = {};
       // local Storage做持久清除
       localStorage.removeItem(USER_KEY);
+      router.push("/login");
     },
     // 删除token数据
-    clearToken(state){
-      delete state.user.token
-    }
+    clearToken(state) {
+      console.log("667");
+      delete state.user.token;
+      localStorage.removeItem(USER_KEY);
+      router.push("/login");
+    },
   },
   actions: {},
   modules: {},
