@@ -1,36 +1,30 @@
 <template>
   <div class="container">
     <van-tabs v-model="activeChannelIndex">
-      <van-tab title="推荐">
-        <div class="scroll-wrapper">
-          <van-list
-            v-model="loading"
-            :finished="finished"
-            finished-text="没有更多了"
-            @load="onLoad"
-          >
-            <van-cell v-for="item in list" :key="item" :title="item"></van-cell>
-          </van-list>
-        </div>
+      <van-tab
+        :title="item.name"
+        v-for="(item, index) in channelList"
+        :key="index"
+      >
+        <com-article :channelID="item.id"></com-article>
       </van-tab>
-      <van-tab title="数据库">数据库内容展示</van-tab>
-      <van-tab title="后端">后端内容展示</van-tab>
     </van-tabs>
   </div>
 </template>
 
 <script>
+import { apiChannelList } from "@/api/channel.js";
+import comArticle from "./components/com-article.vue";
 export default {
   name: "home",
-  components: {},
+  components: {
+    comArticle,
+  },
   mixins: [],
   props: {},
   data() {
     return {
       activeChannelIndex: 0,
-      list: [],
-      loading: false,
-      finished: false,
     };
   },
   computed: {},
@@ -42,22 +36,22 @@ export default {
     ) {
       this.$router.push("/login");
     }
+    this.getChannelList();
   },
   mounted() {},
   beforeDestroy() {},
   destroyed() {},
   methods: {
-    onLoad() {
-      console.log("11");
-      setTimeout(() => {
-        for (let i = 0; i < 10; i++) {
-          this.list.push(this.list.length + 1);
-        }
-        this.loading = false;
-        if (this.list.length >= 80) {
-          this.finished = true;
-        }
-      }, 1000);
+    getChannelList() {
+      // const result = await apiChannelList();
+      // console.log(result.channels);
+      this.channelList = [
+        { name: "推荐", id: "12" },
+        { name: "后端", id: "13" },
+        { name: "linux", id: "14" },
+        { name: "人工智能", id: "15" },
+        { name: "前端", id: "16" },
+      ];
     },
   },
 };
@@ -74,14 +68,6 @@ export default {
   }
   /deep/ .van-tab__pane {
     height: 100%;
-    .scroll-wrapper {
-      height: 100%;
-      overflow: auto;
-      .van-list {
-        height: 100%;
-        overflow: auto;
-      }
-    }
   }
   /deep/ .van-tabs__line {
     background-color: #1989fa;
