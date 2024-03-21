@@ -32,3 +32,10 @@ export function apiArticleReport({ aritcleID, type, remark = "" }) {
     },
   });
 }
+// 获取文章详情
+export function apiArticleDetail(articleID) {
+  return request({
+    url: "/api/v1_0/articles/" + articleID,
+    method: "get",
+  });
+}

@@ -85,7 +85,6 @@ export default {
       this.$emit("input", false);
     },
     articleDislike() {
-      console.log("123", this.articleID);
       this.$toast.success("处理成功");
       this.$emit("input", false);
       this.$emit("dislikeSuccess");

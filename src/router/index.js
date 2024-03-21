@@ -42,7 +42,8 @@ const routes = [
     component: () => import("@/views/user/login.vue"), //登录
   },
   {
-    path: "/article",
+    path: "/article/:aid",
+    name:'article',
     component: () => import("@/views/article/index.vue"), //文章详情
   },
   {
@@ -50,7 +51,8 @@ const routes = [
     component: () => import("@/views/search/index.vue"), //搜索中心
   },
   {
-    path: "/search/result",
+    path: "/search/result/:q",// q是路由参数，搜素关键字
+    name:'result',
     component: () => import("@/views/search/result.vue"), //搜索结果
   },
 ];
